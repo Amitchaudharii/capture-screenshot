@@ -1,13 +1,39 @@
 import Header from "@/common/headers/Header";
-import Description from "@/common/pragraphs/Description";
-import React from "react";
-import UrlInput from "../input/UrlInput";
+import Description from "@/common/paragraphs/Description";
+import React, { useEffect, useState } from "react";
+import URLInput from "../input/URLInput";
+import ResultModal from "../modal/ResultModal";
+import ResultLoaderIcon from "../loader/ResultLoaderIcon";
+
+export interface postResultInterface {
+  id: string;
+  url: string;
+  status: string;
+  created_at: string;
+  result_url: string | null;
+  failure_reason: string | null;
+}
 
 const MainSection = () => {
+  // FOR RESULT MODAL
+  const [isResultModalOpen, setIsResultModalOpen] = useState<boolean>(false);
+
+  // FOR STORE PREVIOUS IDS STORE
+  const [previousData, setPreviousData] = useState<postResultInterface[]>([]);
+
+  // FOR GET USER DATA FROM LOCAL STORAGE
+  useEffect(() => {
+    const restPreviousData = localStorage.getItem("previousData");
+
+    if (restPreviousData) {
+      setPreviousData(JSON.parse(restPreviousData));
+    }
+  }, []);
+
   return (
     <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
       <div className="relative flex flex-col items-center justify-center antialiased">
-        <div className="max-w-5xl mx-auto flex flex-col gap-4">
+        <div className="max-w-4xl mx-auto flex flex-col gap-4">
           <Header>
             Capture Website Screenshots Instantly
             <span className="text-neutral-200 not-italic font-normal">🚀</span>
@@ -18,9 +44,23 @@ const MainSection = () => {
             share, or analyze web pages effortlessly.
             <br /> Try it now!
           </Description>
-          <UrlInput />
+          <URLInput
+            setIsResultModalOpen={setIsResultModalOpen}
+            setPreviousData={setPreviousData}
+          />
         </div>
       </div>
+
+      <ResultModal
+        isResultModalOpen={isResultModalOpen}
+        setIsResultModalOpen={setIsResultModalOpen}
+        previousData={previousData}
+        setPreviousData={setPreviousData}
+      />
+
+      {!isResultModalOpen && previousData.length > 0 && (
+        <ResultLoaderIcon setIsResultModalOpen={setIsResultModalOpen} />
+      )}
     </main>
   );
 };

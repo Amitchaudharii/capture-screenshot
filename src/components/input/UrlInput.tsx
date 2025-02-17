@@ -1,28 +1,78 @@
-import React from "react";
+import URLSubmitButton from "@/common/buttons/URLSubmitButton";
+import URLField from "@/common/inputs/URLField";
+import { postData } from "@/lib/api";
+import React, { useCallback, useState } from "react";
+import { postResultInterface } from "../section/MainSection";
 
-const UrlInput = () => {
+interface URLInputInterfce {
+  setIsResultModalOpen: (isOpen: boolean) => void;
+  setPreviousData: React.Dispatch<React.SetStateAction<postResultInterface[]>>;
+}
+
+const URLInput = ({
+  setIsResultModalOpen,
+  setPreviousData,
+}: URLInputInterfce) => {
+  const [webURL, setWebURL] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleOnChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      setWebURL(value);
+    },
+    []
+  );
+
+  const handleSubmit = useCallback(async () => {
+    if (!webURL.trim()) {
+      alert("Enter website URL");
+      return;
+    }
+
+    // FOR VALIDATION PROPER WEB URL
+    try {
+      new URL(webURL);
+    } catch {
+      alert("Enter a valid website URL");
+      return;
+    }
+
+    setIsLoading(true);
+
+    // FOR POST WEBURL
+    const result = await postData<
+      { url: string },
+      { data: postResultInterface }
+    >("/api/capture", { url: webURL });
+
+    setIsLoading(false);
+
+    if (result) {
+      setPreviousData((prev: postResultInterface[]) => {
+        if (!result?.data) return prev;
+        const updatedData = [
+          ...prev,
+          result.data as unknown as postResultInterface,
+        ];
+
+        // FOR STORE USER DATA ON LOCAL STORAGE
+        localStorage.setItem("previousData", JSON.stringify(updatedData));
+        return updatedData;
+      });
+
+      setIsResultModalOpen(true);
+    } else {
+      console.log("Submission failed.");
+    }
+  }, [webURL]);
+
   return (
     <div className="relative w-full">
-      <input
-        type="text"
-        placeholder="Enter website URL (e.g., https://example.com)"
-        className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 outline-none w-full relative p-2 bg-neutral-950 placeholder:text-neutral-700 transition-all"
-      />
-      <button
-        type="submit"
-        className="absolute top-1/2 right-1 -translate-y-1/2 bg-teal-600 hover:bg-teal-500 text-white p-2 rounded-lg transition-all"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="w-5 h-5"
-        >
-          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-        </svg>
-      </button>
+      <URLField onChange={handleOnChange} />
+      <URLSubmitButton onClick={handleSubmit} loading={isLoading} />
     </div>
   );
 };
 
-export default UrlInput;
+export default URLInput;
