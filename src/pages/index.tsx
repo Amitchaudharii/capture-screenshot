@@ -12,7 +12,10 @@ export default function Home() {
           name="description"
           content="Enter any URL and get a high-quality screenshot in seconds. Ourtool instantly captures full-page snapshots, making it easy tosave, share, or analyze web pages effortlessly."
         />
-        <meta name="keywords" content="" />
+        <meta
+          name="keywords"
+          content="screenshot, generator, webURL, image, capture"
+        />
         <meta name="author" content="Amit Chaudhary" />
 
         <meta property="og:title" content="Capture Website Screenshots" />
@@ -21,7 +24,10 @@ export default function Home() {
           content="Enter any URL and get a high-quality screenshot in seconds. Ourtool instantly captures full-page snapshots, making it easy tosave, share, or analyze web pages effortlessly."
         />
         <meta property="og:image" content="" />
-        <meta property="og:url" content="" />
+        <meta
+          property="og:url"
+          content="https://screenshotgenerator.aamitchaudhary.com.np"
+        />
         <meta property="og:type" content="website" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -32,7 +38,10 @@ export default function Home() {
         />
         <meta name="twitter:image" content="" />
 
-        <link rel="canonical" href="" />
+        <link
+          rel="canonical"
+          href="https://screenshotgenerator.aamitchaudhary.com.np"
+        />
       </Head>
       <BackgroundBeamsWithCollision>
         <MainContainer>
