@@ -1,9 +1,9 @@
 import Header from "@/common/headers/Header";
 import Description from "@/common/paragraphs/Description";
 import React, { useEffect, useState } from "react";
-import URLInput from "../input/URLInput";
 import ResultModal from "../modal/ResultModal";
 import ResultLoaderIcon from "../loader/ResultLoaderIcon";
+import URLInput from "../input/URLInput";
 
 export interface postResultInterface {
   id: string;
