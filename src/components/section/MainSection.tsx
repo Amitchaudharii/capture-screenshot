@@ -3,7 +3,7 @@ import Description from "@/common/paragraphs/Description";
 import React, { useEffect, useState } from "react";
 import ResultModal from "../modal/ResultModal";
 import ResultLoaderIcon from "../loader/ResultLoaderIcon";
-import URLInput from "../input/URLInput";
+import URLInput from "./URLInput";
 
 export interface postResultInterface {
   id: string;

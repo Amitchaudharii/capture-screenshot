@@ -2,7 +2,7 @@ import URLSubmitButton from "@/common/buttons/URLSubmitButton";
 import URLField from "@/common/inputs/URLField";
 import { postData } from "@/lib/api";
 import React, { useCallback, useState } from "react";
-import { postResultInterface } from "../section/MainSection";
+import { postResultInterface } from "./MainSection";
 
 interface URLInputInterfce {
   setIsResultModalOpen: (isOpen: boolean) => void;
