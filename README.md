@@ -1,8 +1,10 @@
-Generate screenshot of a URL. [visit](https://screenshotgenerator.aamitchaudhary.com.np)
+Generate screenshot of a URL. [VISIT](https://screenshotgenerator.aamitchaudhary.com.np)
 
-## Getting Started
+## About
 
 Capture Website Screenshots Instantly🚀
+
+Enter any URL and get a high-quality screenshot in seconds. Our tool instantly captures full-page snapshots, making it easy to save, share, or analyze web pages effortlessly.
 
 ## Features
 
@@ -16,7 +18,7 @@ Capture Website Screenshots Instantly🚀
 - Nextjs [Next.js](https://nextjs.org)
 - Tailwindcss [Tailwindcss](https://tailwindcss.com)
 
-## packages
+## Packages
 
 - Axios [Axios](https://axios-http.com/docs/intro) Promise-based HTTP client for Node.js and browsers with async support.
 - Motion [Motion](https://www.npmjs.com/package/motion) javascript animation library.
